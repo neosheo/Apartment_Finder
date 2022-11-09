@@ -17,6 +17,12 @@ bedrooms = os.getenv('BEDROOMS')
 min_price = os.getenv('MIN_PRICE')
 max_price = os.getenv('MAX_PRICE')
 
+# load telegram configurations
+if os.path.isfile('configs.txt') == False:
+	print('You have not configured a bot. Please run configure.py')
+	sys.exit()
+with open('configs.txt', 'r') as f:
+	configs = f.readlines()
 
 # read apartments that have already been sent
 known_apts = []
@@ -64,8 +70,8 @@ def scrape(page_num):
 		message = f"{item['title']}: {item['href']}"
 		with open('known_apts.txt', 'a') as f:
 			f.write(f"{item['title']}\n")
-		telegram_send.send(messages=[message], conf='jcc.config')
-		telegram_send.send(messages=[message], conf='jvj.config')
+		for config in configs:
+			telegram_send.send(messages=[message], conf=config.rstrip('\n'))
 	# scrape subsequent pages of search results
 	if page_num + 1 > int(last_page[0]):
 		sys.exit()

@@ -13,5 +13,12 @@ env_text = f'STATE="{state}"\nCITY="{city}"\nBEDROOMS={bedrooms}\nMIN_PRICE={min
 with open('.env', 'w') as f:
 	f.write(env_text)
 
+config_name = input("What should this configuration be named (don't include .config in name)? ")
+config = f'{config_name}.config'
 # configure telegram bot
-configure('telegram.config', channel=False, group=False, fm_integration=False)
+configure(config, channel=False, group=False, fm_integration=False)
+
+if os.path.isfile('configs.txt') == False:
+	open('configs.txt', 'w').close()
+with open('configs.txt', 'a') as f:
+	f.write(config)
