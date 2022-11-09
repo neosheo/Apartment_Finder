@@ -14,4 +14,4 @@ with open('.env', 'w') as f:
 	f.write(env_text)
 
 # configure telegram bot
-#configure('telegram.config', channel=False, group=False, fm_integration=False)
+configure('telegram.config', channel=False, group=False, fm_integration=False)
