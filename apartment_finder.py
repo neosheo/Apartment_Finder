@@ -1,14 +1,27 @@
-#!/home/john/MEGAsync/Projects/Webscrapers/Apartment_Finder/venv/bin/python3.11
+#!/usr/bin/env python3
 
 import requests
 from requests.exceptions import Timeout
 import sys
+import os
 import telegram_send
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+
+
+# load parameters from .env
+load_dotenv()
+state = os.getenv('STATE')
+city = os.getenv('CITY')
+bedrooms = os.getenv('BEDROOMS')
+min_price = os.getenv('MIN_PRICE')
+max_price = os.getenv('MAX_PRICE')
 
 
 # read apartments that have already been sent
 known_apts = []
+if os.path.isfile('known_apts.txt') == False:
+	open('known_apts.txt', 'w').close()
 with open('known_apts.txt', 'r') as f:
 	apts = f.readlines()
 for apt in apts:
@@ -20,11 +33,11 @@ for apt in apts:
 url = 'https://apartmentfinder.com'
 header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 params = {
-	'state': 'Louisiana',
-	'city': 'Baton Rouge',
-	'bedrooms': 2,
-	'min_price': 850,
-	'max_price': 1100
+	'state': state,
+	'city': city,
+	'bedrooms': bedrooms,
+	'min_price': min_price,
+	'max_price': max_price
 }
 
 last_page = []
