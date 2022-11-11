@@ -1,6 +1,6 @@
 # Apartment_Finder
 
-This python script will search the website apartmentfinder.com for apartments that meet your search criteria. Currently this script only supports the following search parameters: state, city, number of bedrooms, minimum price, and maximum price.
+This python script will search the website apartmentfinder.com for apartments that meet your search criteria.
 
 # Installation
 
