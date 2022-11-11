@@ -2,7 +2,6 @@ import sys
 
 def validate_answer(answer):
 	if answer != 'y' and answer != 'n':
-		print(f'Your answer: {answer}')
 		print('Invalid answer')
 		sys.exit()
 
