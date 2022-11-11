@@ -17,13 +17,20 @@ If the pip command doesn't work try replacing "pip" with "pip3".
 Set up a telegram bot (https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0#create-a-new-telegram-bot-with-botfather)
 Make sure to run the command /token in a chat with @BotFather to get your bot's access token.
 
-# Configuring
+Run configure_telegram.py
 
-Run configure.py
-
-    python configure.py
+    python configure_telegram.py
     
-Here you can set your search parameters and paste your bot's access token. You will get a code when it is complete, add the bot on telegram and send it the code to finish.
+Paste bot's access token when prompted. You will get a code when it is complete, add the bot on telegram and send it the code to finish.
+If the python command doesn't work try replacing "python" with "python3"
+
+# Search parameters
+
+Run set_search_parameters.py
+
+    python set_search_parameters.py
+
+Answer all the questions to tailor your search results. You can rerun this at any time to update your search parameters.
 If the python command doesn't work try replacing "python" with "python3"
 
 # Usage
