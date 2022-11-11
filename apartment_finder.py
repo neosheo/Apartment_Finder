@@ -33,9 +33,9 @@ with open('configs.txt', 'r') as f:
 
 # read apartments that have already been sent
 known_apts = []
-if os.path.isfile('known_apts.txt') == False:
-	open('known_apts.txt', 'w').close()
-with open('known_apts.txt', 'r') as f:
+if os.path.isfile('.known_apts.txt') == False:
+	open('.known_apts.txt', 'w').close()
+with open('.known_apts.txt', 'r') as f:
 	apts = f.readlines()
 for apt in apts:
 	apt = apt.rstrip('\n')
@@ -84,7 +84,7 @@ def scrape(page_num):
 		if item['title'] in known_apts:
 			continue
 		message = f"{item['title']}: {item['href']}"
-		with open('known_apts.txt', 'a') as f:
+		with open('.known_apts.txt', 'a') as f:
 			f.write(f"{item['title']}\n")
 		for config in configs:
 			telegram_send.send(messages=[message], conf=config.rstrip('\n'))
