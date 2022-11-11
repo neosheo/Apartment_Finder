@@ -163,7 +163,8 @@ env_text = f'STATE="{state}"\nCITY="{city}"\nTYPE={home_type}\nBEDROOMS={bedroom
 # write .env file
 with open('.env', 'w') as f:
 	f.write(env_text)
-'''
+
+# create configs.txt
 config_name = input("What should this configuration be named (don't include .config in name)? ")
 config = f'{config_name}.config'
 # configure telegram bot
@@ -173,4 +174,4 @@ if os.path.isfile('configs.txt') == False:
 	open('configs.txt', 'w').close()
 with open('configs.txt', 'a') as f:
 	f.write(config)
-'''
+
