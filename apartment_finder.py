@@ -13,7 +13,9 @@ from dotenv import load_dotenv
 load_dotenv()
 state = os.getenv('STATE')
 city = os.getenv('CITY')
+home_type = os.getenv('TYPE')
 bedrooms = os.getenv('BEDROOMS')
+bathrooms = os.getenv('BATHROOMS')
 min_price = os.getenv('MIN_PRICE')
 max_price = os.getenv('MAX_PRICE')
 pets = os.getenv('PETS')
@@ -46,7 +48,9 @@ header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWe
 params = {
 	'state': state.replace(' ', '-'),
 	'city': city.replace(' ', '-'),
+	'type': home_type,
 	'bedrooms': bedrooms,
+	'bathrooms': bathrooms,
 	'min_price': min_price,
 	'max_price': max_price,
 	'pets': pets,
@@ -63,7 +67,7 @@ last_page = []
 def scrape(page_num):
 	# get html data for search results
 	try:
-		html = requests.get(f"{url}/{params['state'].replace(' ', '-')}/{params['city'].replace(' ', '-')}-Apartments/{params['bedrooms']}-Bedrooms/Page{page_num}/q/?nr={params['min_price']}&xr={params['max_price']}&pt={params['pets']}&sp={params['spec']}&am={params['filters']}&kd={keywords}&ra={params['rating']}&", headers=header, timeout=10)
+		html = requests.get(f"{url}/{params['state'].replace(' ', '-')}/{params['city'].replace(' ', '-')}-{params['type']}/{params['bedrooms']}-Bedrooms/Page{page_num}/q/?nr={params['min_price']}&xr={params['max_price']}&bt={params['bathrooms']}&pt={params['pets']}&sp={params['spec']}&am={params['filters']}&kd={keywords}&ra={params['rating']}&", headers=header, timeout=10)
 	except Timeout:
 		print('Request timed out.')
 		sys.exit(1)

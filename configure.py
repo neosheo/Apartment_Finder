@@ -10,7 +10,12 @@ def validate_answer(answer):
 # get user input for search parameters
 state = input('What state do you want to search in? ')
 city = input('What city do you want to search in? ')
-bedrooms = input('How many bedrooms do you want to look for? ')
+bedrooms = input('How many bedrooms do you want to look for? (0 for any) ')
+bathrooms = input('How many bathrooms do you want to look for? (0 for any) ')
+hm_type = input('Type? (a for apartment, c for condo, h for house, t for townhouse) ')
+if hm_type != 'a' and hm_type != 'c' and hm_type != 'h' and hm_type != 't':
+	print('Invalid answer.')
+	sys.exit()
 min_price = input('What is your minimum price? ')
 max_price = input('What is your maximum price? ')
 dogs = input('Do you have dogs? (y or n) ')
@@ -73,7 +78,18 @@ if min_rate_ask == 'y':
 	if min_rate != '4' and min_rate != '5':
 		print('Invalid answer.')
 		sys.exit()
+else:
+	min_rate = 0
 keywords = input('Please enter any additional keywords, separated by commas.\n' )
+
+if hm_type == 'a':
+	home_type = 'Apartments'
+if hm_type == 'c':
+	home_type = 'Condos'
+if hm_type == 'h':
+	home_type = 'Houses'
+if hm_type == 't':
+	home_type = 'Townhouses'
 
 if dogs == 'y' and cats == 'y':
 	pets = 3
@@ -142,12 +158,12 @@ if min_rate == '4':
 if min_rate == '5':
 	rating += 16	
 
-env_text = f'STATE="{state}"\nCITY="{city}"\nBEDROOMS={bedrooms}\nMIN_PRICE={min_price}\nMAX_PRICE={max_price}\nPETS={pets}\nFILTERS={filters}\nSPECIALTIES={spec}\nMIN_RATING={rating}\nKEYWORDS="{keywords}"'
+env_text = f'STATE="{state}"\nCITY="{city}"\nTYPE={home_type}\nBEDROOMS={bedrooms}\nBATHROOMS={bathrooms}\nMIN_PRICE={min_price}\nMAX_PRICE={max_price}\nPETS={pets}\nFILTERS={filters}\nSPECIALTIES={spec}\nMIN_RATING={rating}\nKEYWORDS="{keywords}"'
 
 # write .env file
 with open('.env', 'w') as f:
 	f.write(env_text)
-
+'''
 config_name = input("What should this configuration be named (don't include .config in name)? ")
 config = f'{config_name}.config'
 # configure telegram bot
@@ -157,4 +173,4 @@ if os.path.isfile('configs.txt') == False:
 	open('configs.txt', 'w').close()
 with open('configs.txt', 'a') as f:
 	f.write(config)
-
+'''
