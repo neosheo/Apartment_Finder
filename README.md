@@ -1,6 +1,6 @@
 # Apartment_Finder
 
-This python script will search the website apartmentfinder.com for apartments that meet your search criteria.
+This python script will search the website apartmentfinder.com for apartments that meet your search criteria and sends you links to the apartments on Telegram.
 
 # Installation
 
