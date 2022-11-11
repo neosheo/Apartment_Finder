@@ -16,6 +16,11 @@ city = os.getenv('CITY')
 bedrooms = os.getenv('BEDROOMS')
 min_price = os.getenv('MIN_PRICE')
 max_price = os.getenv('MAX_PRICE')
+pets = os.getenv('PETS')
+filters = os.getenv('FILTERS')
+spec = os.getenv('SPECIALTIES')
+rating = os.getenv('MIN_RATING')
+keywords = os.getenv('KEYWORDS')
 
 # load telegram configurations
 if os.path.isfile('configs.txt') == False:
@@ -39,19 +44,26 @@ for apt in apts:
 url = 'https://apartmentfinder.com'
 header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 params = {
-	'state': state,
-	'city': city,
+	'state': state.replace(' ', '-'),
+	'city': city.replace(' ', '-'),
 	'bedrooms': bedrooms,
 	'min_price': min_price,
-	'max_price': max_price
+	'max_price': max_price,
+	'pets': pets,
+	'filters': filters,
+	'spec': spec,
+	'rating': rating,
+	'keywords': keywords.replace(' ', '+').split(',')
 }
+keywords = '%2C'.join(params['keywords']).replace(' ', '+')
 
+
+# scrape the website
 last_page = []
-
 def scrape(page_num):
 	# get html data for search results
 	try:
-		html = requests.get(f"{url}/{params['state'].replace(' ', '-')}/{params['city'].replace(' ', '-')}-Apartments/{params['bedrooms']}-Bedrooms/Page{page_num}/q/?nr={params['min_price']}&xr={params['max_price']}", headers=header, timeout=10)
+		html = requests.get(f"{url}/{params['state'].replace(' ', '-')}/{params['city'].replace(' ', '-')}-Apartments/{params['bedrooms']}-Bedrooms/Page{page_num}/q/?nr={params['min_price']}&xr={params['max_price']}&pt={params['pets']}&sp={params['spec']}&am={params['filters']}&kd={keywords}&ra={params['rating']}&", headers=header, timeout=10)
 	except Timeout:
 		print('Request timed out.')
 		sys.exit(1)
