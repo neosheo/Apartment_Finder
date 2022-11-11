@@ -55,7 +55,7 @@ params = {
 	'rating': rating,
 	'keywords': keywords.replace(' ', '+').split(',')
 }
-keywords = '%2C'.join(params['keywords']).replace(' ', '+')
+keywords = '%2C'.join(params['keywords'])
 
 
 # scrape the website
